@@ -30,14 +30,14 @@
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Customer Number :</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.phone"/>
                                         </span>
                                         <span style="float: right; color: #555;">:رقم المؤسسة</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Document Number:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.name"/>
                                         </span>
 
@@ -47,7 +47,7 @@
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Customer Name:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.name"/>
                                         </span>
 
@@ -55,24 +55,24 @@
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Date:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;text-align: center;">
                                             <t t-esc="o.date"/>
                                         </span>
 
-                                        <span style="float: right; color: #555;">التاريخ:</span>
+                                        <span style="float: right; color: #555;">:التاريخ</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Representative Name:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.representive_name"/>
                                         </span>
                                         <span style="float: right; color: #555;">:ممثل المؤسسة</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Due Date:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.invoice_date_due"/>
                                         </span>
                                         <span style="float: right; color: #555;">:تاريخ الإستحقاق</span>
@@ -81,14 +81,14 @@
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Address:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.contact_address"/>
                                         </span>
                                         <span style="float: right; color: #555;">:العنوان</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Sale Man:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.invoice_user_id.name"/>
                                         </span>
                                         <span style="float: right; color: #555;">:الباىْع</span>
@@ -97,14 +97,14 @@
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Telephone:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.mobile"/>
                                         </span>
                                         <span style="float: right; color: #555;">:الرقم</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Currency:</span>
-                                        <span style="margin-left:5px;">
+                                        <span style="margin-left:15px;">
                                             <t t-esc="o.currency_id.name"/>
                                         </span>
                                         <span style="float: right; color: #555;">:العملة</span>
@@ -307,7 +307,6 @@
                                 </div>
                                 <div id="left-elements" class="col-6">
                                     <div class="border p-3">
-                                        <h5>Additional Information</h5>
                                         <table class="table table-sm table-borderless">
                                             <tr>
                                                 <td>
