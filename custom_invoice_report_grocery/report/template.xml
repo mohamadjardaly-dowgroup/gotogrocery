@@ -33,7 +33,7 @@
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.partner_id.phone"/>
                                         </span>
-                                        <span style="float: right; color: #555;">رقم المؤسسة:</span>
+                                        <span style="float: right; color: #555;">:رقم المؤسسة</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Document Number:</span>
@@ -41,7 +41,7 @@
                                             <t t-esc="o.name"/>
                                         </span>
 
-                                        <span style="float: right; color: #555;">رقم المستند:</span>
+                                        <span style="float: right; color: #555;">:رقم المستند</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,7 +75,7 @@
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.invoice_date_due"/>
                                         </span>
-                                        <span style="float: right; color: #555;">تاريخ الإستحقاق</span>
+                                        <span style="float: right; color: #555;">:تاريخ الإستحقاق</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,14 +84,14 @@
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.partner_id.contact_address"/>
                                         </span>
-                                        <span style="float: right; color: #555;">العنوان:</span>
+                                        <span style="float: right; color: #555;">:العنوان</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Sale Man:</span>
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.invoice_user_id.name"/>
                                         </span>
-                                        <span style="float: right; color: #555;">الباىْع</span>
+                                        <span style="float: right; color: #555;">:الباىْع</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -100,14 +100,14 @@
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.partner_id.mobile"/>
                                         </span>
-                                        <span style="float: right; color: #555;">الرقم:</span>
+                                        <span style="float: right; color: #555;">:الرقم</span>
                                     </td>
                                     <td style="font-weight: bold; padding: 10px;">
                                         <span style="float: left;">Currency:</span>
                                         <span style="margin-left:5px;">
                                             <t t-esc="o.currency_id.name"/>
                                         </span>
-                                        <span style="float: right; color: #555;">العملة:</span>
+                                        <span style="float: right; color: #555;">:العملة</span>
                                     </td>
                                 </tr>
                             </table>
@@ -138,14 +138,14 @@
                                             <span>Unit Price</span>
                                             <span class="text-muted">(سعر الوحدة)</span>
                                         </th>
-                                        <th name="th_discount" t-if="display_discount"
+                                        <th name="th_discount"
                                             t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span>Disc.%</span>
                                             <span class="text-muted">(الخصم)</span>
                                         </th>
                                         <th name="th_taxes"
                                             t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                            <span>Taxes</span>
+                                            <span>VAT</span>
                                             <span class="text-muted">(الضرائب)</span>
                                         </th>
                                         <th name="th_subtotal" class="text-end">
@@ -184,7 +184,7 @@
                                                     t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                                     <span class="text-nowrap" t-field="line.price_unit">9.00</span>
                                                 </td>
-                                                <td name="td_discount" t-if="display_discount"
+                                                <td name="td_discount"
                                                     t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                                     <span class="text-nowrap" t-field="line.discount">0</span>
                                                 </td>
@@ -279,25 +279,14 @@
                                                 <tr>
                                                     <td>Old Balance</td>
                                                     <td class="text-end">
-                                                        <span t-esc="o.partner_id.total_invoiced - o.amount_total"/>
+                                                      <span t-esc="('%.2f' % max(o.partner_id.total_due - o.amount_total, 0))"/>
+
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>New Balance</td>
                                                     <td class="text-end">
-                                                        <span t-field="o.partner_id.total_invoiced"/>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Discount</td>
-                                                    <td class="text-end">
-<!--                                                        <span t-field="o.discount"/>-->
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>VAT</td>
-                                                    <td class="text-end">
-<!--                                                        <span t-field="o.vat"/>-->
+                                                        <span t-field="o.partner_id.total_due"/>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -317,18 +306,21 @@
                                     <t t-call="account.document_tax_totals_company_currency_template"/>
                                 </div>
                                 <div id="left-elements" class="col-6">
-        <div class="border p-3">
-            <h5>Additional Information</h5>
-            <table class="table table-sm table-borderless">
-                <tr>
-                    <td><strong>Total Weight</strong></td>
-                    <td class="text-end">
-                        <span t-field="o.total_weight"/> kg
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                                    <div class="border p-3">
+                                        <h5>Additional Information</h5>
+                                        <table class="table table-sm table-borderless">
+                                            <tr>
+                                                <td>
+                                                    <strong>Total Weight</strong>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-field="o.total_weight"/>
+                                                    kg
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
