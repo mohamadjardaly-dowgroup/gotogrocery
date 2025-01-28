@@ -313,7 +313,7 @@
                     </div>
 
 
-                    <div class="text-muted mb-3"
+                    <div class="mt-5 text-muted mb-3"
                          t-attf-style="#{'text-align:justify;text-justify:inter-word;' if o.company_id.terms_type != 'html' else ''}"
                          t-if="not is_html_empty(o.narration)" name="comment"
                          dir="rtl">
