@@ -13,3 +13,12 @@ class AccountMove(models.Model):
             total_weight = sum(
                 line.product_id.weight * line.quantity for line in move.invoice_line_ids if line.product_id.weight)
             move.total_weight = total_weight
+
+
+
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    product_packaging_id = fields.Many2one('product.packaging', string="Product Packaging")
+    product_packaging_qty = fields.Float( string="Product Packaging Qty")
