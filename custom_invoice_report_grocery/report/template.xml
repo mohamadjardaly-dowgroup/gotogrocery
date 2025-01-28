@@ -8,23 +8,6 @@
                     <t t-set="o" t-value="o.with_context(lang=lang)"/>
                     <div class="mt-5 clearfix">
                         <div class="page mb-4">
-                            <h2 style="padding-top:10%;">
-                                <span t-if="not proforma"/>
-                                <span t-else="">PROFORMA</span>
-                                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
-                                <span t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
-                                <span t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice
-                                </span>
-                                <span t-elif="o.move_type == 'out_refund' and o.state == 'posted'">Credit Note</span>
-                                <span t-elif="o.move_type == 'out_refund' and o.state == 'draft'">Draft Credit Note
-                                </span>
-                                <span t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">Cancelled Credit
-                                    Note
-                                </span>
-                                <span t-elif="o.move_type == 'in_refund'">Vendor Credit Note</span>
-                                <span t-elif="o.move_type == 'in_invoice'">Vendor Bill</span>
-                            </h2>
-
                             <table style="border: 1px solid #ccc; width: 100%; margin-top: 20px; background-color: #f9f9f9; border-collapse: collapse;">
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
@@ -110,13 +93,9 @@
                                     </td>
                                 </tr>
                             </table>
-
-
                             <div class="oe_structure"/>
-
                             <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                             <div style="margin-top:2%;" class="oe_structure"/>
-
                             <table class="table table-sm o_main_table table-bordered" name="invoice_line_table">
                                 <thead>
                                     <tr>
@@ -236,8 +215,6 @@
                                     </t>
                                 </tbody>
                             </table>
-
-
                             <div>
                                 <div id="right-elements"
                                      t-attf-class="#{'col-5' if report_type != 'html' else 'col-12 col-md-5'} ms-5 d-inline-block float-end">
@@ -298,18 +275,6 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="mb-2">
-                                        <p class="text-end lh-sm"
-                                           t-if="o.company_id.display_invoice_amount_total_words">
-                                            Total amount in words:
-                                            <br/>
-                                            <small class="text-muted lh-sm">
-                                                <span t-field="o.amount_total_words">Thirty one dollar and Five cents
-                                                </span>
-                                            </small>
-                                        </p>
-                                    </div>
-                                    <t t-call="account.document_tax_totals_company_currency_template"/>
                                 </div>
                                 <div id="left-elements" class="col-6">
                                     <div class="border p-3">
@@ -331,7 +296,7 @@
                     </div>
 
                     <div style="display: flex; margin-top: 20px;">
-                        <span style="text-align: left; flex: 1; margin-left: 25%;">
+                        <span style="text-align: left; flex: 1; margin-left: 15%;">
                             <strong>Driver:</strong>
                         </span>
 
