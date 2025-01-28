@@ -23,7 +23,6 @@
                                 </span>
                                 <span t-elif="o.move_type == 'in_refund'">Vendor Credit Note</span>
                                 <span t-elif="o.move_type == 'in_invoice'">Vendor Bill</span>
-                                <span t-if="o.name != '/'" t-field="o.name">INV/2023/0001</span>
                             </h2>
 
                             <table style="border: 1px solid #ccc; width: 100%; margin-top: 20px; background-color: #f9f9f9; border-collapse: collapse;">
@@ -136,7 +135,7 @@
                                         <th name="th_priceunit"
                                             t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span>Unit Price</span>
-                                            <span class="text-muted">(سعر الوحدة)</span>
+                                            <span class="text-muted"> (سعر الوحدة) </span>
                                         </th>
                                         <th name="th_discount"
                                             t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -328,16 +327,20 @@
                         <span style="text-align: left; flex: 1; margin-left: 25%;">
                             <strong>Driver:</strong>
                         </span>
-                        <span style="text-align: right; margin-left: 25%;">
-                            <strong>Signature:</strong>
-                            <span style="margin-left:2%;border-bottom: 1px solid #000; width: 100px; display: inline-block;"/>
-                        </span>
+
                     </div>
 
                     <div class="text-muted mb-3"
                          t-attf-style="#{'text-align:justify;text-justify:inter-word;' if o.company_id.terms_type != 'html' else ''}"
-                         t-if="not is_html_empty(o.narration)" name="comment">
+                         t-if="not is_html_empty(o.narration)" name="comment"
+                    dir="rtl">
                         <span t-field="o.narration"/>
+                    </div>
+                    <div>
+                        <span style="text-align: right; margin-left: 70%;">
+                            <strong>Signature:</strong>
+                            <span style="margin-left:2%;border-bottom: 1px solid #000; width: 100px; display: inline-block;"/>
+                        </span>
                     </div>
                 </t>
             </t>
