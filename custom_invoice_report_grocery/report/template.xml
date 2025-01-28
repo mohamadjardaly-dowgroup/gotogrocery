@@ -8,6 +8,9 @@
                     <t t-set="o" t-value="o.with_context(lang=lang)"/>
                     <div class="mt-5 clearfix">
                         <div class="page mb-4">
+                            <h2 style="padding-top:10%;">
+                            </h2>
+
                             <table style="border: 1px solid #ccc; width: 100%; margin-top: 20px; background-color: #f9f9f9; border-collapse: collapse;">
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
@@ -93,9 +96,13 @@
                                     </td>
                                 </tr>
                             </table>
+
+
                             <div class="oe_structure"/>
+
                             <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                             <div style="margin-top:2%;" class="oe_structure"/>
+
                             <table class="table table-sm o_main_table table-bordered" name="invoice_line_table">
                                 <thead>
                                     <tr>
@@ -215,6 +222,8 @@
                                     </t>
                                 </tbody>
                             </table>
+
+
                             <div>
                                 <div id="right-elements"
                                      t-attf-class="#{'col-5' if report_type != 'html' else 'col-12 col-md-5'} ms-5 d-inline-block float-end">
@@ -289,18 +298,20 @@
                                                 </td>
                                             </tr>
                                         </table>
+
                                     </div>
+                                    <div class="p-3" >
+                                        <span>
+                                            <strong>Driver:</strong>
+                                        </span>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div style="display: flex; margin-top: 20px;">
-                        <span style="text-align: left; flex: 1; margin-left: 15%;">
-                            <strong>Driver:</strong>
-                        </span>
-
-                    </div>
 
                     <div class="text-muted mb-3"
                          t-attf-style="#{'text-align:justify;text-justify:inter-word;' if o.company_id.terms_type != 'html' else ''}"
