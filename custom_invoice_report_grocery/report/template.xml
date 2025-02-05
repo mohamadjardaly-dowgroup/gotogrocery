@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-
     <template id="new_report">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
@@ -10,11 +9,15 @@
                         <div class="page mb-4">
                             <h2 style="padding-top:10%;">
                             </h2>
-
                             <table style="border: 1px solid #ccc; width: 100%; margin-top: 20px; background-color: #f9f9f9; border-collapse: collapse;">
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
-                                        <span style="float: left;">Customer Number :</span>
+                                        <span t-if="o.move_type in ['out_invoice', 'out_refund']" style="float: left;">
+                                            Customer Number :
+                                        </span>
+                                        <span t-if="o.move_type in ['in_invoice', 'in_refund']" style="float: left;">
+                                            Vendor Number:
+                                        </span>
                                         <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.phone"/>
                                         </span>
@@ -31,7 +34,12 @@
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; padding: 10px;">
-                                        <span style="float: left;">Customer Name:</span>
+                                        <span t-if="o.move_type in ['out_invoice', 'out_refund']" style="float: left;">
+                                            Customer Name:
+                                        </span>
+                                        <span t-if="o.move_type in ['in_invoice', 'in_refund']" style="float: left;">
+                                            Vendor Name:
+                                        </span>
                                         <span style="margin-left:15px;">
                                             <t t-esc="o.partner_id.name"/>
                                         </span>
@@ -96,13 +104,9 @@
                                     </td>
                                 </tr>
                             </table>
-
-
                             <div class="oe_structure"/>
-
                             <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                             <div style="margin-top:2%;" class="oe_structure"/>
-
                             <table class="table table-sm o_main_table table-bordered" name="invoice_line_table">
                                 <thead>
                                     <tr>
@@ -222,8 +226,6 @@
                                     </t>
                                 </tbody>
                             </table>
-
-
                             <div>
                                 <div id="right-elements"
                                      t-attf-class="#{'col-5' if report_type != 'html' else 'col-12 col-md-5'} ms-5 d-inline-block float-end">
@@ -232,7 +234,56 @@
                                             <table class="table table-sm table-borderless avoid-page-break-inside">
                                                 <!--Tax totals-->
                                                 <t t-set="tax_totals" t-value="o.tax_totals or {}"/>
-                                                <t t-call="account.document_tax_totals"/>
+                                                <t t-foreach="tax_totals.get('subtotals')" t-as="subtotal">
+                                                    <tr class="border-black o_subtotal">
+                                                        <td>
+                                                            <strong t-out="subtotal['name']">Untaxed Amount</strong>
+                                                        </td>
+
+                                                        <td class="text-end">
+                                                            <span
+                                                                    t-att-class="oe_subtotal_footer_separator"
+                                                                    t-out="subtotal['formatted_amount']"
+                                                            >27.00
+                                                            </span>
+                                                        </td>
+                                                        <tr>
+                                                            <td>
+                                                                Tax in L.B:
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <span t-field="o.tax_in_other_curr"/>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tr>
+                                                    <tr>
+                                                        <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                                        <t t-call="account.tax_groups_totals"/>
+                                                    </tr>
+
+                                                </t>
+
+                                                <tr t-if="'formatted_rounding_amount' in tax_totals and tax_totals.get('rounding_amount') != 0">
+                                                    <td>Rounding</td>
+                                                    <td class="text-end">
+                                                        <span t-out="tax_totals.get('formatted_rounding_amount')">0
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <!--Total amount with all taxes-->
+                                                <tr class="border-black o_total">
+                                                    <td>
+                                                        <strong>Total</strong>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <span t-out="tax_totals.get('formatted_amount_total')">31.05
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <!--                                                <t t-call="account.document_tax_totals"/>-->
 
                                                 <!--Payments-->
                                                 <t t-if="print_with_payments">
@@ -268,6 +319,7 @@
                                                         </t>
                                                     </t>
                                                 </t>
+
                                                 <tr>
                                                     <td>Old Balance</td>
                                                     <td class="text-end">
@@ -300,7 +352,7 @@
                                         </table>
 
                                     </div>
-                                    <div class="p-3" >
+                                    <div class="p-3">
                                         <span>
                                             <strong>Driver:</strong>
                                         </span>
@@ -311,7 +363,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="mt-5 text-muted mb-3"
                          t-attf-style="#{'text-align:justify;text-justify:inter-word;' if o.company_id.terms_type != 'html' else ''}"
@@ -329,6 +380,5 @@
             </t>
         </t>
     </template>
-
 
 </odoo>
