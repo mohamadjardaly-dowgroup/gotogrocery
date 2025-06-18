@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Change "Quantity" to "Pieces" -->
+    <record id="view_purchase_order_form_qty_label" model="ir.ui.view">
+        <field name="name">purchase.order.form.qty.label</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Update the tree view inside the order_line -->
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_qty']" position="attributes">
+                <attribute name="string">Pieces</attribute>
+            </xpath>
+
+            <!-- Update the form view inside order_line if exists -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='product_qty']" position="attributes">
+                <attribute name="string">Pieces</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Change "Packaging Quantity" to "Boxes" (if field is shown in purchase) -->
+    <record id="view_purchase_order_form_packaging_label" model="ir.ui.view">
+        <field name="name">purchase.order.form.packaging.label</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace 'product_packaging_id' or similar with actual field name if exists -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='product_packaging_qty']" position="attributes">
+                <attribute name="string">Boxes</attribute>
+            </xpath>
+
+             <!-- Update the tree view inside the order_line -->
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_packaging_qty']" position="attributes">
+                <attribute name="string">Boxes</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
