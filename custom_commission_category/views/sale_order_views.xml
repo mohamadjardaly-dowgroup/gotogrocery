@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sale Order Form View -->
+        <record id="view_order_form_commission" model="ir.ui.view">
+            <field name="name">sale.order.form.commission</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Add commission column to order lines -->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="commission_amount" widget="monetary"/>
+                </xpath>
+                
+                <!-- Add total commission field -->
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="total_commission" widget="monetary"/>
+                </xpath>
+
+<!--                  <xpath expr="//page/field[@name='order_line']/tree/field[@name='qty_delivered']" position="after">-->
+<!--                    <field name="commission_amount" widget="monetary"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+<!--        &lt;!&ndash; Sale Order Line Form View &ndash;&gt;-->
+<!--        <record id="view_sales_order_line_form_commission" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.line.form.commission</field>-->
+<!--            <field name="model">sale.order.line</field>-->
+<!--            <field name="inherit_id" ref="sale.view_sales_order_line_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--             -->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- Sale Order Tree View -->
+        <record id="view_quotation_tree_commission" model="ir.ui.view">
+            <field name="name">sale.order.tree.commission</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="total_commission" widget="monetary" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

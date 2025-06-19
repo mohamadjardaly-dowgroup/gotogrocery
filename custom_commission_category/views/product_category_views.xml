@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Category Form View -->
+        <record id="product_category_form_view_commission" model="ir.ui.view">
+            <field name="name">product.category.form.commission</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                 <group name="first" position="after">
+                    <group string="Commission Settings" col="4">
+                        <field name="commission_type"/>
+                        <field name="commission_amount"/>
+                    </group>
+                 </group>
+            </field>
+        </record>
+
+        <!-- Product Category Tree View -->
+        <record id="product_category_list_view_commission" model="ir.ui.view">
+            <field name="name">product.category.tree.commission</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_list_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="commission_type"/>
+                    <field name="commission_amount"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
